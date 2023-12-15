@@ -7,7 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class PedramBotApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(PedramBotApplication.class, args);
+
+
 	}
 
 }

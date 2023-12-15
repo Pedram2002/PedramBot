@@ -1,6 +1,7 @@
 package PedramK.PedramBot.service;
 
 
+import PedramK.PedramBot.classes.MySqlFunctions;
 import PedramK.PedramBot.config.BotConfig;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -60,6 +61,8 @@ public class TelegramBot extends TelegramLongPollingBot {
         }
     }
 
+    private MySqlFunctions mySqlFunctions = new MySqlFunctions();
+
     @Override
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
@@ -73,7 +76,7 @@ public class TelegramBot extends TelegramLongPollingBot {
 
             switch (ms) {
                 default:
-                    String s = encodePedramDictionary(onlineDic(ms.toLowerCase()),userName);
+                    String s = encodePedramDictionary(onlineDic(ms.toLowerCase()), userName);
                     System.out.println(s);
                     if (!s.isEmpty() || !s.isBlank()) {
                         sendMessage(chatId, s);
@@ -84,9 +87,6 @@ public class TelegramBot extends TelegramLongPollingBot {
 
         }
     }
-
-
-
 
 
     private void sayStart(long chatId, String firstName) {
