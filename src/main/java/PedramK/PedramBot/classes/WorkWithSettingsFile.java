@@ -4,9 +4,12 @@ import java.io.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 public class WorkWithSettingsFile {
 
     private static String readFromSettingFile() {
+
+
         String line;
         StringBuilder resultStringBuilder = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader("langSettings.txt"))) {
@@ -70,7 +73,8 @@ public class WorkWithSettingsFile {
         return sResult;
     }
     public static String loadUserSetting(String user) {
-        String line = readFromSettingFile();
+        String line =  readFromSettingFile();
+
         if (line.isEmpty()) return "";
 
         Pattern pattern = Pattern.compile("☻" + user + "☺en(?<en>.*?)de(?<de>.*?)fa(?<fa>.*?)ru(?<ru>.*?)◙");

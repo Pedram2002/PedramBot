@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static PedramK.PedramBot.classes.WorkWithSettingsFile.*;
+import static PedramK.PedramBot.classes.MySqlFunctions.*;
+
 
 public class MyFunctions {
     public static String onlineDic(String word) {
@@ -64,7 +65,8 @@ public class MyFunctions {
         Pattern pattern = Pattern.compile("☻(?<lang>.*?)☺(?<word>.*?)=(?<sub>.*?)◘(?<translate>.*?)◙");
         Matcher matcher = pattern.matcher(translate);
         StringBuilder sResult = new StringBuilder();
-        String userSetting = loadUserSetting(userName);
+        String userSetting = getUserState(userName);
+
         while (matcher.find()) {
             String sLang = matcher.group("lang");
             if (sLang.length() > 2) sLang = sLang.substring(2);

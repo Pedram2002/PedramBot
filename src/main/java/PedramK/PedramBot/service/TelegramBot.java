@@ -11,14 +11,12 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import static PedramK.PedramBot.classes.MyFunctions.*;
-import static PedramK.PedramBot.classes.WorkWithSettingsFile.*;
+import static PedramK.PedramBot.classes.MySqlFunctions.*;
 
 @Component
 public class TelegramBot extends TelegramLongPollingBot {
 
     final BotConfig config;
-
-
     public TelegramBot(BotConfig config) {
         this.config = config;
     }
@@ -34,28 +32,28 @@ public class TelegramBot extends TelegramLongPollingBot {
                 sendMessage(chatId, langSettings);
                 break;
             case "/Off_eng":
-                saveLangSetting(userName, "en", "0");
+                setUserState(userName, "en", 0);
                 break;
             case "/On_eng":
-                saveLangSetting(userName, "en", "1");
+                setUserState(userName, "en", 1);
                 break;
             case "/Off_de":
-                saveLangSetting(userName, "de", "0");
+                setUserState(userName, "de", 0);
                 break;
             case "/On_de":
-                saveLangSetting(userName, "de", "1");
+                setUserState(userName, "de", 1);
                 break;
             case "/Off_fa":
-                saveLangSetting(userName, "fa", "0");
+                setUserState(userName, "fa", 0);
                 break;
             case "/On_fa":
-                saveLangSetting(userName, "fa", "1");
+                setUserState(userName, "fa", 1);
                 break;
             case "/Off_ru":
-                saveLangSetting(userName, "ru", "0");
+                setUserState(userName, "ru", 0);
                 break;
             case "/On_ru":
-                saveLangSetting(userName, "ru", "1");
+                setUserState(userName, "ru", 1);
                 break;
 
         }
