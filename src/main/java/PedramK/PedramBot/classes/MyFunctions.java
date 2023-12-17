@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,10 +22,9 @@ public class MyFunctions {
         }
 
 
-        return sResult.toString();
+        return sResult;
     }
-
-    public static String downloadString(String url) {
+    private static String downloadString(String url) {
         StringBuilder s = new StringBuilder();
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(new URL(url).openStream()));
@@ -39,26 +37,6 @@ public class MyFunctions {
         }
         return s.toString();
     }
-
-    public static ArrayList<String> addWordFromDictSite(String str) {
-        ArrayList<String> result = new ArrayList<>();
-        int i = str.indexOf("<h2 class='mcardlmenuh'>Индекс</h2>");
-        if (i == -1) return result;
-        //end of the text
-        int i2 = str.indexOf("</div>", i);
-        if (i2 == -1) return result;
-        str = str.substring(i, i2);
-        Pattern pattern = Pattern.compile("(?<=alt='icon'>)((?!<).)*(?=<)");
-        Matcher matcher = pattern.matcher(str);
-
-        while (matcher.find()) {
-            String s = matcher.group();
-            System.out.println("downloadStringFromSpell: " + s);
-            result.add(matcher.group());
-        }
-        return result;
-    }
-
     public static String encodePedramDictionary(String translate, String userName) {
         // ☻deen☺essen=verbum◘eat◙
         String[] tr = translate.split("☻");

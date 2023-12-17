@@ -1,57 +1,32 @@
 package PedramK.PedramBot.classes;
-
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
-import java.sql.DriverManager;
-import java.sql.SQLException;
-
-import java.sql.Connection;
-import java.sql.Statement;
-import static org.junit.Assert.assertEquals;
-//import static PedramK.PedramBot.classes.MySqlFunctions.getUserState;
+import org.junit.jupiter.api.*;
 
 public class MySqlFunctionsTest {
-    private static final String URL = "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1";
-    private static final String USER = "sa";
-    private static final String PASSWORD = "";
+    @Test
+    void testGetUserId() {
+        int result = MySqlFunctions.getUserId("testUser");
 
-    private Connection connection;
-    private Statement statement;
-
-    @Before
-    public void setup() throws SQLException {
-        connection = DriverManager.getConnection("jdbc:mysql://localhost/airport", "root", "123456");
-        statement = connection.createStatement();
-        // Создайте таблицу и добавьте тестовые данные
-        createTable();
-        insertTestData();
-    }
-
-    @After
-    public void tearDown() throws SQLException {
-        statement.execute("DROP TABLE airport.users");
-        statement.close();
-        connection.close();
+        Assertions.assertEquals(1, result);
     }
 
     @Test
-    public void testGetUserState() {
+    void testGetUserState() {
         String result = MySqlFunctions.getUserState("testUser");
 
-        // Проверяем, что результат соответствует ожидаемому значению
-        Assertions.assertEquals("fa0ru0de0en0", result);
+        Assertions.assertEquals("fa1ru0de1en0", result);
     }
 
-    private void createTable() throws SQLException {
-        statement.execute("CREATE TABLE airport.users (username VARCHAR(255), fa INT, ru INT, de INT, en INT)");
+    @Test
+    void testGetUserStateWithParameters() {
+        int result = MySqlFunctions.getUserState("testUser", "fa");
+
+        Assertions.assertEquals(1, result);
     }
 
-    private void insertTestData() throws SQLException {
-        statement.execute("INSERT INTO airport.users (username, fa, ru, de, en) VALUES ('testUser', 1, 1, 1, 1)");
-    }
+    @Test
+    void testLoadLangSetting() {
+        String result = MySqlFunctions.loadLangSetting("testUser");
 
+        Assertions.assertEquals("English is Off , /On_eng\nGerman is On , /Off_de\nPersian is On , /Off_fa\nRussian is Off , /On_ru", result);
+    }
 }

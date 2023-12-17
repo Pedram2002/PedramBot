@@ -1,14 +1,22 @@
 package PedramK.PedramBot.classes;
 
 import java.sql.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class MySqlFunctions {
     static Connection connection;
     static Statement statement;
 
-    private static int getUserId(String userName) {
+    private static void setConnection() {
+        if (statement != null) return;
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/airport", "root", "123456");
+            statement = connection.createStatement();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public static int getUserId(String userName) {
+        setConnection();
         try {
             String sql = "SELECT id FROM airport.users WHERE username = '" + userName + "'";
             ResultSet resultSet = statement.executeQuery(sql);
@@ -22,17 +30,8 @@ public class MySqlFunctions {
             throw new RuntimeException(e);
         }
     }
-
-    public MySqlFunctions() {
-        try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/airport", "root", "123456");
-            statement = connection.createStatement();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public static int getUserState(String userName, String lang) {
+        setConnection();
         try {
             String sql = "SELECT * FROM airport.users WHERE username = '" + userName + "'";
             ResultSet resultSet = statement.executeQuery(sql);
@@ -47,9 +46,14 @@ public class MySqlFunctions {
         }
     }
     public static String getUserState(String userName) {
+        setConnection();
         try {
-            String sResult ;
+            String sResult;
             String sql = "SELECT * FROM airport.users WHERE username = '" + userName + "'";
+            if (statement == null) {
+
+            }
+
             ResultSet resultSet = statement.executeQuery(sql);
 
             if (resultSet.next()) {
@@ -57,7 +61,7 @@ public class MySqlFunctions {
                 sResult += "ru" + resultSet.getInt("ru");
                 sResult += "de" + resultSet.getInt("de");
                 sResult += "en" + resultSet.getInt("en");
-                return  sResult ;
+                return sResult;
             } else {
                 return "fa1ru1de1en1";
             }
@@ -66,6 +70,7 @@ public class MySqlFunctions {
         }
     }
     public static void setUserState(String userName, String lang, int state) {
+        setConnection();
         try {
             int userid = getUserId(userName);
 
@@ -93,7 +98,6 @@ public class MySqlFunctions {
             throw new RuntimeException(e);
         }
     }
-
     public static String loadLangSetting(String user) {
         String sResult;
 
