@@ -9,10 +9,16 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Main class for the PedramBot application.
+ * <p>
+ * This class serves as the entry point for the Spring Boot application.
+ * It initializes logging using the java.util.logging framework, configuring a FileHandler for log output.
+ */
 @SpringBootApplication
 public class PedramBotApplication {
+	// Logger for logging application events
 	public static Logger logger = Logger.getLogger(Main.class.getName());
-
 	public static void main(String[] args) {
 		SpringApplication.run(PedramBotApplication.class, args);
 
@@ -27,5 +33,4 @@ public class PedramBotApplication {
 
 
 	}
-
 }

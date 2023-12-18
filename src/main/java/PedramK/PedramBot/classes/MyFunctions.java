@@ -11,8 +11,20 @@ import java.util.regex.Pattern;
 import static PedramK.PedramBot.PedramBotApplication.logger;
 import static PedramK.PedramBot.classes.MySqlFunctions.*;
 
-
+/**
+ * A utility class containing various functions, including online dictionary lookup and dictionary encoding.
+ */
 public class MyFunctions {
+    /**
+     * Retrieves information from an online dictionary based on the specified word.
+     * <p>
+     * This method sends a request to an HTTP listener, providing the specified word as a parameter.
+     * The response from the server is processed, and if the response is not empty, it is returned.
+     * If the response is empty, the method returns "oops."
+     *
+     * @param word The word for which information is requested from the online dictionary.
+     * @return A string containing information retrieved from the online dictionary or "oops" if the word is not found.
+     */
     public static String onlineDic(String word) {
         String sResult;
 
@@ -26,6 +38,16 @@ public class MyFunctions {
         logger.log(Level.INFO, word);
         return sResult;
     }
+
+    /**
+     * Downloads a string from a specified URL.
+     * <p>
+     * This method opens a connection to the specified URL, reads the content, and returns it as a string.
+     * If an IOException occurs during the process, a warning is logged, and an empty string is returned.
+     *
+     * @param url The URL from which to download the string.
+     * @return The downloaded string or an empty string if an error occurs.
+     */
     private static String downloadString(String url) {
         StringBuilder s = new StringBuilder();
         try {
@@ -36,9 +58,21 @@ public class MyFunctions {
             }
         } catch (IOException ex) {
             logger.log(Level.WARNING, ex.getMessage());
+            return "";
         }
         return s.toString();
     }
+
+    /**
+     * Encodes information from the Pedram dictionary based on user settings.
+     * <p>
+     * This method takes a translation string, extracts information based on a predefined pattern,
+     * and formats the result based on the user's language settings.
+     *
+     * @param translate The translation string to be encoded.
+     * @param userName  The username for which the user settings are retrieved.
+     * @return A formatted string containing information from the Pedram dictionary based on user preferences.
+     */
     public static String encodePedramDictionary(String translate, String userName) {
         // ☻deen☺essen=verbum◘eat◙
         String[] tr = translate.split("☻");

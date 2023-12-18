@@ -5,10 +5,16 @@ import java.util.logging.Level;
 
 import static PedramK.PedramBot.PedramBotApplication.logger;
 
+/**
+ * A utility class containing functions for interacting with a MySQL database related to user settings.
+ */
 public class MySqlFunctions {
     static Connection connection;
     static Statement statement;
 
+    /**
+     * Establishes a connection to the MySQL database.
+     */
     private static void setConnection() {
         if (statement != null) return;
         try {
@@ -18,6 +24,13 @@ public class MySqlFunctions {
             logger.log(Level.WARNING, e.getMessage());
         }
     }
+
+    /**
+     * Retrieves the user ID based on the specified username.
+     *
+     * @param userName The username for which to retrieve the user ID.
+     * @return The user ID or -1 if the user is not found.
+     */
     public static int getUserId(String userName) {
         setConnection();
         try {
@@ -34,6 +47,14 @@ public class MySqlFunctions {
             return -1;
         }
     }
+
+    /**
+     * Retrieves the language-specific state for a user.
+     *
+     * @param userName The username for which to retrieve the state.
+     * @param lang     The language code (e.g., "en", "fa", "ru", "de").
+     * @return The language-specific state or 1 if the user is not found.
+     */
     public static int getUserState(String userName, String lang) {
         setConnection();
         try {
@@ -50,6 +71,13 @@ public class MySqlFunctions {
             return 1;
         }
     }
+
+    /**
+     * Retrieves the overall language state for a user.
+     *
+     * @param userName The username for which to retrieve the state.
+     * @return A string representing the user's overall language settings.
+     */
     public static String getUserState(String userName) {
         setConnection();
         try {
@@ -72,6 +100,13 @@ public class MySqlFunctions {
             return "fa1ru1de1en1";
         }
     }
+    /**
+     * Sets the language-specific state for a user.
+     *
+     * @param userName The username for which to set the state.
+     * @param lang     The language code (e.g., "en", "fa", "ru", "de").
+     * @param state    The state to set.
+     */
     public static void setUserState(String userName, String lang, int state) {
         setConnection();
         try {
@@ -101,6 +136,13 @@ public class MySqlFunctions {
             logger.log(Level.WARNING, e.getMessage());
         }
     }
+
+    /**
+     * Loads and formats language settings for a user.
+     *
+     * @param user The username for which to load language settings.
+     * @return A formatted string representing the user's language settings.
+     */
     public static String loadLangSetting(String user) {
         String sResult;
 
