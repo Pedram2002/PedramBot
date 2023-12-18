@@ -9,6 +9,9 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import java.util.logging.Level;
+
+import static PedramK.PedramBot.PedramBotApplication.logger;
 import static PedramK.PedramBot.classes.MyFunctions.*;
 import static PedramK.PedramBot.classes.MySqlFunctions.*;
 
@@ -94,7 +97,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         try {
             execute(message);
         } catch (TelegramApiException e) {
-            throw new RuntimeException(e);
+            logger.log(Level.WARNING, e.getMessage());
         }
     }
 

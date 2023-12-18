@@ -4,9 +4,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static PedramK.PedramBot.PedramBotApplication.logger;
 import static PedramK.PedramBot.classes.MySqlFunctions.*;
 
 
@@ -21,7 +23,7 @@ public class MyFunctions {
             sResult = str;
         }
 
-
+        logger.log(Level.INFO, word);
         return sResult;
     }
     private static String downloadString(String url) {
@@ -33,7 +35,7 @@ public class MyFunctions {
                 s.append(ss);
             }
         } catch (IOException ex) {
-            ex.printStackTrace();
+            logger.log(Level.WARNING, ex.getMessage());
         }
         return s.toString();
     }

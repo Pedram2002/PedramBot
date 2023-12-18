@@ -1,6 +1,9 @@
 package PedramK.PedramBot.classes;
 
 import java.sql.*;
+import java.util.logging.Level;
+
+import static PedramK.PedramBot.PedramBotApplication.logger;
 
 public class MySqlFunctions {
     static Connection connection;
@@ -12,7 +15,7 @@ public class MySqlFunctions {
             connection = DriverManager.getConnection("jdbc:mysql://localhost/airport", "root", "123456");
             statement = connection.createStatement();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            logger.log(Level.WARNING, e.getMessage());
         }
     }
     public static int getUserId(String userName) {
@@ -27,7 +30,8 @@ public class MySqlFunctions {
                 return -1;
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            logger.log(Level.WARNING, e.getMessage());
+            return -1;
         }
     }
     public static int getUserState(String userName, String lang) {
@@ -42,7 +46,8 @@ public class MySqlFunctions {
                 return 1;
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            logger.log(Level.WARNING, e.getMessage());
+            return 1;
         }
     }
     public static String getUserState(String userName) {
@@ -50,9 +55,6 @@ public class MySqlFunctions {
         try {
             String sResult;
             String sql = "SELECT * FROM airport.users WHERE username = '" + userName + "'";
-            if (statement == null) {
-
-            }
 
             ResultSet resultSet = statement.executeQuery(sql);
 
@@ -66,7 +68,8 @@ public class MySqlFunctions {
                 return "fa1ru1de1en1";
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            logger.log(Level.WARNING, e.getMessage());
+            return "fa1ru1de1en1";
         }
     }
     public static void setUserState(String userName, String lang, int state) {
@@ -95,7 +98,7 @@ public class MySqlFunctions {
             }
 
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            logger.log(Level.WARNING, e.getMessage());
         }
     }
     public static String loadLangSetting(String user) {

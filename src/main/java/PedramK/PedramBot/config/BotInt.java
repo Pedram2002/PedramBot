@@ -9,6 +9,10 @@ import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
+import java.util.logging.Level;
+
+import static PedramK.PedramBot.PedramBotApplication.logger;
+
 @Component
 public class BotInt {
     @Autowired
@@ -20,7 +24,7 @@ public class BotInt {
             TelegramBotsApi telegramBotsApi = new TelegramBotsApi(DefaultBotSession.class);
             telegramBotsApi.registerBot(bot);
         } catch (TelegramApiException e) {
-            throw new RuntimeException(e);
+            logger.log(Level.WARNING, e.getMessage());
         }
     }
 
