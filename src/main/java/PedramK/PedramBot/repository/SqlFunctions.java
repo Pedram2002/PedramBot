@@ -1,4 +1,4 @@
-package PedramK.PedramBot.classes;
+package PedramK.PedramBot.repository;
 
 import java.sql.*;
 import java.util.logging.Level;
@@ -8,7 +8,7 @@ import static PedramK.PedramBot.PedramBotApplication.logger;
 /**
  * A utility class containing functions for interacting with a MySQL database related to user settings.
  */
-public class MySqlFunctions {
+public class SqlFunctions {
     static Connection connection;
     static Statement statement;
 
@@ -100,6 +100,7 @@ public class MySqlFunctions {
             return "fa1ru1de1en1";
         }
     }
+
     /**
      * Sets the language-specific state for a user.
      *
@@ -176,5 +177,32 @@ public class MySqlFunctions {
         }
 
         return sResult;
+    }
+
+    /**
+     * Retrieves a list of usernames from the "users" table in database.
+     *
+     * This method establishes a database connection, executes a SQL query to fetch all usernames
+     * from the specified table, and returns a formatted string containing the retrieved usernames.
+     * The usernames are appended to a StringBuilder, separated by newline characters.
+     *
+     * @return A newline-separated string containing the usernames of all users retrieved from the database.
+     *         An empty string is returned if an exception occurs during execution.
+     */
+    public static String getAllUsers() {
+        setConnection();
+        try {
+            String sql = "SELECT * FROM airport.users";
+            ResultSet resultSet = statement.executeQuery(sql);
+            StringBuilder users = new StringBuilder();
+            while (resultSet.next()) {
+                users.append(resultSet.getString("username")).append("\n") ;
+            }
+
+            return users.toString();
+        } catch (Exception e) {
+            logger.log(Level.WARNING, e.getMessage());
+            return "";
+        }
     }
 }

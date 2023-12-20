@@ -9,7 +9,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import java.util.logging.Level;
 import static PedramK.PedramBot.PedramBotApplication.logger;
 import static PedramK.PedramBot.classes.MyFunctions.*;
-import static PedramK.PedramBot.classes.MySqlFunctions.*;
+import static PedramK.PedramBot.repository.SqlFunctions.*;
 
 /**
  * A Telegram bot implementation that extends TelegramLongPollingBot.

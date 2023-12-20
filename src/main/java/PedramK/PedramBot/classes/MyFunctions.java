@@ -9,7 +9,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static PedramK.PedramBot.PedramBotApplication.logger;
-import static PedramK.PedramBot.classes.MySqlFunctions.*;
+import static PedramK.PedramBot.repository.SqlFunctions.*;
 
 /**
  * A utility class containing various functions, including online dictionary lookup and dictionary encoding.
