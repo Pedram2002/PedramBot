@@ -1,10 +1,7 @@
 package PedramK.PedramBot.controller;
 
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +51,7 @@ public class MainRestController {
         return result;
     }
 
-    @RequestMapping(value = "/users", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/userList", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Users>  restMethodAllUsers() {
         List<Users> resultList = new ArrayList<>();
 
@@ -65,5 +62,13 @@ public class MainRestController {
         }
 
         return resultList;
+    }
+
+
+    @RequestMapping(value = "/users", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    private String  restMethodUsersCount() {
+        int i =getAllUsers().split("\n").length;
+
+        return "We have " + i + " users. For more detailed information, log in as an admin and enter here <a href=\"userList\">List all users</a>";
     }
 }

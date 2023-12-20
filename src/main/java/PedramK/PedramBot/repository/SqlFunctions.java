@@ -181,7 +181,7 @@ public class SqlFunctions {
 
     /**
      * Retrieves a list of usernames from the "users" table in database.
-     *
+     * <p>
      * This method establishes a database connection, executes a SQL query to fetch all usernames
      * from the specified table, and returns a formatted string containing the retrieved usernames.
      * The usernames are appended to a StringBuilder, separated by newline characters.

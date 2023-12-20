@@ -5,35 +5,37 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+
+@Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        // Configure authentication manager (provide your own user details service)
-        auth.inMemoryAuthentication()
-                .withUser("pedram")
-                .password(passwordEncoder().encode("123456"))
-                .roles("USER");
+       auth .inMemoryAuthentication().withUser("ADMIN")
+               .password("123")
+               .roles("ADMIN")
+               .and() .withUser("user")
+               .password("123")
+               .roles("USER");
+
     }
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // Configure authorization rules
-        http.authorizeRequests()
-                .antMatchers("/secure/**").authenticated()
-                .anyRequest().permitAll()
-                .and()
-                .formLogin().permitAll()
-                .and()
-                .logout().permitAll();
+      http.authorizeRequests()
+              .antMatchers("/userList").hasRole("ADMIN")
+              .antMatchers("/**").permitAll().and().formLogin();
     }
 
+
+
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    public PasswordEncoder encoder(){
+        return NoOpPasswordEncoder.getInstance();
     }
 }

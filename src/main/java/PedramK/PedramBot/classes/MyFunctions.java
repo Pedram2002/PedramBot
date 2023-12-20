@@ -31,7 +31,7 @@ public class MyFunctions {
         String str = downloadString("http://45.142.212.28:8080/HttpListener/?word=" + word);
         if (str.isEmpty()) {
             sResult = "oops";
-        } else {//word is not found
+        } else {//word is  found
             sResult = str;
         }
 
