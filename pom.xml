@@ -57,6 +57,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-mysql</artifactId>
+			<version>10.3.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -71,7 +76,18 @@
 	              </goals>
                </execution>
                </executions>
-
+			</plugin>
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>4.0.3</version>
+				<configuration>
+					<user>databaseUser</user>
+					<password>databasePassword</password>
+					<schemas>
+						<schema>schemaName</schema>
+					</schemas>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
