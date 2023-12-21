@@ -13,6 +13,7 @@ import static PedramK.PedramBot.repository.SqlFunctions.*;
 
 /**
  * A Telegram bot implementation that extends TelegramLongPollingBot.
+ * @author Pedram Kalami
  */
 @Component
 public class TelegramBot extends TelegramLongPollingBot {
@@ -145,6 +146,4 @@ public class TelegramBot extends TelegramLongPollingBot {
     public String getBotUsername() {
         return config.getBotName();
     }
-
-
 }

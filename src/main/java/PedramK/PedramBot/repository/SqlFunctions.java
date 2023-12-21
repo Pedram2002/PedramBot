@@ -7,6 +7,7 @@ import static PedramK.PedramBot.PedramBotApplication.logger;
 
 /**
  * A utility class containing functions for interacting with a MySQL database related to user settings.
+ * @author Pedram Kalami
  */
 public class SqlFunctions {
     static Connection connection;

@@ -14,6 +14,7 @@ import java.util.logging.Logger;
  * <p>
  * This class serves as the entry point for the Spring Boot application.
  * It initializes logging using the java.util.logging framework, configuring a FileHandler for log output.
+ * @author Pedram Kalami
  */
 @SpringBootApplication
 public class PedramBotApplication {

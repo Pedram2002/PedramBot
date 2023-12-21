@@ -13,6 +13,7 @@ import static PedramK.PedramBot.repository.SqlFunctions.*;
 
 /**
  * A utility class containing various functions, including online dictionary lookup and dictionary encoding.
+ *  * @author Pedram Kalami
  */
 public class MyFunctions {
     /**
